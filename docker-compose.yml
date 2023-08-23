@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+  app:
+    image: app-image:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5431:5432'
+  pgadmin:
+    restart: unless-stopped
+    build:
+      context: .
+    ports:
+      - '79:80'
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_VERSION: ${PGADMIN_VERSION}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
