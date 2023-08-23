@@ -58,3 +58,23 @@
 2) скрипт загрузки данных из API в базу <br>
 
 В базу должны быть загружены все персонажи
+
+Запуск и остановка
+
+Для запуска:
+```bash
+docker build . && docker compose up
+```
+Или:
+```bash
+docker build . && docker-compose up
+```
+Для остановки:
+```bash
+docker compose down
+```
+Или:
+```bash
+docker-compose down
+```
+
